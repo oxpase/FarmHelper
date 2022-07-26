@@ -26,7 +26,7 @@ public class Resync {
 
     public static void update(BlockPos lastBrokenPos) {
         cachedPos = lastBrokenPos;
-        executor.schedule(checkCrop, 4, TimeUnit.SECONDS);
+        executor.schedule(checkCrop, 30, TimeUnit.SECONDS);
     }
 
     static Runnable checkCrop = () -> {
