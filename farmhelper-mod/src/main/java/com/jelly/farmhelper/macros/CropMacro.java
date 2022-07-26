@@ -54,7 +54,6 @@ public class CropMacro extends Macro {
     private final Clock stoneDropTimer = new Clock();
     private int hoeSlot;
     private int hoeEquipFails = 0;
-    private int randomCooldown = 0;
 
 
     @Override
@@ -101,12 +100,7 @@ public class CropMacro extends Macro {
             return;
         }
 
-        if(randomCooldown > 0){
-            randomCooldown --;
-            updateKeys(false, false, false, false, false);
-            return;
-        }
-
+       
         if (!MacroHandler.randomizing && (currentState != State.DROPPING && currentState != State.TP_PAD && currentState != State.STONE_THROW && (AngleUtils.smallestAngleDifference(AngleUtils.get360RotationYaw(), yaw) > 5 || Math.abs(mc.thePlayer.rotationPitch - pitch) > 5))) {
             LogUtils.debugFullLog("Staff rotate");
             rotation.reset();
@@ -237,18 +231,12 @@ public class CropMacro extends Macro {
 
                 return;
             case RIGHT:
-                if(Utils.nextInt(450) == 0){
-                    randomCooldown = 25 + Utils.nextInt(30);
-                    return;
-                }
+              
                 LogUtils.debugLog("Middle of row, going right");
                 updateKeys(false, false, true, false, findAndEquipHoe());
                 return;
             case LEFT:
-                if(Utils.nextInt(450) == 0){
-                    randomCooldown = 25 + Utils.nextInt(30);
-                    return;
-                }
+              
                 LogUtils.debugLog("Middle of row, going left");
                 updateKeys(false, false, false, true, findAndEquipHoe());
                 return;
