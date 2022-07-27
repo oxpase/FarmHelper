@@ -22,9 +22,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Build
-        run: chmod +x gradlew; ./gradlew setupCiWorkspace && ./gradlew build --stacktrace
+        run: chmod +x gradlew; ./gradlew setupCiWorkspace && ./gradlew build --stacktrace --warning-mode all
       - name: Upload build artifacts
         uses: actions/upload-artifact@v1
         with:
           name: build-artifacts
-          path: build
+          path: build --warning-mode all
